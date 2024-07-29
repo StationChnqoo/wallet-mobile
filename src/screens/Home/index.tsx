@@ -1,5 +1,5 @@
 import type {PropsWithChildren} from 'react';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, useColorScheme, View} from 'react-native';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -8,10 +8,10 @@ import {
   DebugInstructions,
   Header,
   LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {RootStacksProp} from '..';
 import SuggestTips from './components/SuggestTips';
+import Services from '@src/constants/Services';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -48,11 +48,10 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 const HomeScreen: React.FC<MyProps> = props => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+    new Services().selectDfcfFundCounts();
+    return function () {};
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
