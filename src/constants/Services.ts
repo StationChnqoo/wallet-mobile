@@ -10,7 +10,7 @@ export default class Services {
     this.instance = axios.create({
       // baseURL: Config.SERVER,
       baseURL: 'http://192.168.0.101:3000/api/chnqoo-notebook',
-      timeout: 2000,
+      timeout: 10000,
       headers: {
         t: time,
         s: md5(`Chnqoo@t:${time}`),
@@ -26,11 +26,6 @@ export default class Services {
       });
     });
     this.instance.interceptors.response.use(response => {
-      let result = response.data;
-      if (result.success) {
-      } else {
-        console.log(result);
-      }
       return response;
     });
   }
@@ -112,6 +107,22 @@ export default class Services {
     ] = `https://data.eastmoney.com/bkzj/hy_5.html`;
     let result = await this.instance.get(
       `/api/qt/clist/get?cb=&fid=f62&po=1&pz=99&pn=1&np=1&fltt=2&invt=2&fs=m%3A90+t%3A2&fields=f12%2Cf14%2Cf2%2Cf3%2Cf62%2Cf184%2Cf66%2Cf69%2Cf72%2Cf75%2Cf78%2Cf81%2Cf84%2Cf87%2Cf204%2Cf205%2Cf124%2Cf1%2Cf13`,
+    );
+    return result.data;
+  }
+
+  /**
+   * 走势
+   * @param code
+   * @returns
+   */
+  async selectDfcfFundTrends(code: string) {
+    this.instance.defaults.baseURL = 'https://push2.eastmoney.com';
+    this.instance.defaults.headers[
+      'referer'
+    ] = `https://quote.eastmoney.com/center/hszs.html`;
+    let result = await this.instance.get(
+      `/api/qt/stock/trends2/get?secid=${code}&fields1=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13&fields2=f51,f52,f53,f54,f55,f56,f57,f58&iscr=0&cb=&isqhquote=`,
     );
     return result.data;
   }

@@ -14,7 +14,7 @@ const FundValues: React.FC<MyProps> = props => {
     return color;
   };
 
-  return (
+  return datas.length > 0 ? (
     <View style={styles.view}>
       {datas.map((it, index) => (
         <View key={index} style={styles.viewItem}>
@@ -29,7 +29,7 @@ const FundValues: React.FC<MyProps> = props => {
         </View>
       ))}
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({

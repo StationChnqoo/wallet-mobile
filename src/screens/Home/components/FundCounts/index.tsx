@@ -30,7 +30,7 @@ const FundCounts: React.FC<MyProps> = props => {
           )}%`}</Text>
         ))}
       </View>
-      <View style={{height: 12}} />
+      <View style={{height: 10}} />
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {datas.map((it, index) => (
           <View

@@ -1,5 +1,5 @@
 import {FundsRank} from '@src/constants/Interfaces';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 interface MyProps {
@@ -37,7 +37,7 @@ const FundRanks: React.FC<MyProps> = props => {
     );
   };
 
-  return (
+  return datas.length > 0 ? (
     <View style={styles.view}>
       <View style={{flexDirection: 'row'}}>
         {loadGroup(0, datas.slice(0, 10))}
@@ -45,7 +45,7 @@ const FundRanks: React.FC<MyProps> = props => {
         {loadGroup(1, datas.slice(-10).reverse())}
       </View>
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
