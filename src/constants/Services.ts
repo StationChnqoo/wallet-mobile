@@ -73,6 +73,6 @@ export default class Services {
     let result = await this.instance.get(
       '/api/qt/ulist.np/get?cb=&fltt=2&secids=1.000001%2C0.399001&fields=f1%2Cf2%2Cf3%2Cf4%2Cf6%2Cf12%2Cf13%2Cf104%2Cf105%2Cf106',
     );
-    return result;
+    return result.data;
   }
 }

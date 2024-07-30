@@ -1,57 +1,48 @@
-import type {PropsWithChildren} from 'react';
-import React, {useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-} from 'react-native/Libraries/NewAppScreen';
-import {RootStacksProp} from '..';
-import SuggestTips from './components/SuggestTips';
+import {useFocusEffect} from '@react-navigation/native';
+import * as Types from '@src/constants/Interfaces';
 import Services from '@src/constants/Services';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import {useInterval} from 'ahooks';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {RootStacksProp} from '..';
+import FundCounts from './components/FundCounts';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
 const HomeScreen: React.FC<MyProps> = props => {
+  const [counts, setCounts] = useState<number[]>(Array(3).fill(1));
+  const [timer, setTimer] = useState<undefined | number>(undefined);
+
   useEffect(() => {
-    new Services().selectDfcfFundCounts();
     return function () {};
   }, []);
+
+  useInterval(() => {
+    loadFundCounts();
+  }, timer);
+
+  useFocusEffect(
+    useCallback(() => {
+      setTimer(2000);
+      return function () {
+        setTimer(undefined);
+      };
+    }, []),
+  );
+
+  const loadFundCounts = async () => {
+    let result = await new Services().selectDfcfFundCounts();
+    let datas: Types.FundsCount[] = result.data?.diff || [];
+    setCounts([
+      datas[0].f104 + datas[1].f104,
+      datas[0].f105 + datas[1].f105,
+      datas[0].f106 + datas[1].f106,
+    ]);
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
@@ -59,43 +50,15 @@ const HomeScreen: React.FC<MyProps> = props => {
         style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Header />
         <View style={{paddingHorizontal: 15}}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <SuggestTips onClosePress={() => {}} />
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <View style={{height: 12}} />
+          <FundCounts datas={counts} />
         </View>
       </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const styles = StyleSheet.create({});
 
 export default HomeScreen;
