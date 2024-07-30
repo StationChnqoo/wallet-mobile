@@ -75,4 +75,44 @@ export default class Services {
     );
     return result.data;
   }
+
+  /**
+   * 指数的实时净值
+   * @param code
+   */
+  async selectDfcfFundValues(code: string) {
+    /**
+     * 目前爬虫发现的
+     * 159开头的，请求参数`secid=` -> 0.xxx
+     * 511开头的，请求参数为 ... -> 1.xxx
+     */
+    let codePrefix = code.startsWith('159')
+      ? '0.'
+      : code.startsWith('511')
+      ? '1.'
+      : '';
+    this.instance.defaults.baseURL = 'https://push2.eastmoney.com';
+    this.instance.defaults.headers[
+      'referer'
+    ] = `https://so.eastmoney.com/web/s?keyword=${code}`;
+    let result = await this.instance.get(
+      `/api/qt/stock/get?cb=&fields=f57%2Cf58%2Cf59%2Cf152%2Cf43%2Cf169%2Cf170%2Cf60%2Cf44%2Cf45%2Cf168%2Cf50%2Cf47%2Cf48%2Cf49%2Cf46%2Cf78%2Cf85%2Cf86%2Cf169%2Cf117%2Cf107%2Cf111%2Cf116%2Cf117%2Cf118%2Cf163%2Cf171%2Cf113%2Cf114%2Cf115%2Cf161%2Cf162%2Cf164%2Cf168%2Cf172%2Cf177%2Cf180%2Cf181%2Cf292%2Cf751%2Cf752&secid=${codePrefix}${code}&invt=2`,
+    );
+    return result.data;
+  }
+
+  /**
+   * 行业板块涨跌幅
+   * @returns
+   */
+  async selectDfcfFundRanks() {
+    this.instance.defaults.baseURL = 'https://push2.eastmoney.com';
+    this.instance.defaults.headers[
+      'referer'
+    ] = `https://data.eastmoney.com/bkzj/hy_5.html`;
+    let result = await this.instance.get(
+      `/api/qt/clist/get?cb=&fid=f62&po=1&pz=99&pn=1&np=1&fltt=2&invt=2&fs=m%3A90+t%3A2&fields=f12%2Cf14%2Cf2%2Cf3%2Cf62%2Cf184%2Cf66%2Cf69%2Cf72%2Cf75%2Cf78%2Cf81%2Cf84%2Cf87%2Cf204%2Cf205%2Cf124%2Cf1%2Cf13`,
+    );
+    return result.data;
+  }
 }
