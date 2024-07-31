@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 
 import {useFocusEffect} from '@react-navigation/native';
@@ -7,11 +7,11 @@ import Services from '@src/constants/Services';
 import {useInterval} from 'ahooks';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import FundCounts from './components/FundCounts';
-import FundValues from './components/FundValues';
-import FundRanks from './components/FundRanks';
-import FundTrend from './components/FundTrend';
 import ETF from './components/ETF';
+import FundCounts from './components/FundCounts';
+import FundRanks from './components/FundRanks';
+import FundTrends from './components/FundTrends';
+import FundValues from './components/FundValues';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -22,28 +22,23 @@ const HomeScreen: React.FC<MyProps> = props => {
   const [timer, setTimer] = useState<undefined | number>(undefined);
   const [values, setValues] = useState<Types.FundsValue[]>([]);
   const [ranks, setRanks] = useState<Types.FundsRank[]>([]);
-  const [trends, setTrends] = useState<number[]>([]);
+  const [trends, setTrends] = useState<number[][]>(Array(4).fill([]));
   const [etf, setEtf] = useState<number[]>([]);
 
-  useInterval(
-    () => {
-      initAllDatas();
-    },
-    timer,
-    {immediate: true},
-  );
-
-  const initAllDatas = async () => {
+  const init = async () => {
     loadFundCounts();
     loadFundValues();
     loadFundRanks();
     loadFundTrends();
     loadEtfDetails();
   };
+  useInterval(() => {
+    init();
+  }, timer);
 
   useFocusEffect(
     useCallback(() => {
-      initAllDatas();
+      init();
       setTimer(60 * 1000);
       return function () {
         setTimer(undefined);
@@ -78,13 +73,18 @@ const HomeScreen: React.FC<MyProps> = props => {
   };
 
   const loadFundTrends = async () => {
-    let result = await new Services().selectDfcfFundTrends('1.000001');
-    let datas: string[] = result.data?.trends || [];
-    let _trends = [...datas].map(it => {
-      let s = it.split(',');
-      return parseFloat(s[1]);
-    });
-    setTrends(_trends);
+    let codes = ['1.000300', '0.399006', '1.000001', '0.399007'];
+    let _datas = [...trends];
+    for (let i = 0; i < codes.length; i++) {
+      let result = await new Services().selectDfcfFundTrends(codes[i]);
+      let datas: string[] = result.data?.trends || [];
+      let _trends = [...datas].map(it => {
+        let s = it.split(',');
+        return parseFloat(s[1]);
+      });
+      _datas[i] = _trends;
+      setTrends(_datas);
+    }
   };
 
   const loadEtfDetails = async () => {
@@ -120,8 +120,8 @@ const HomeScreen: React.FC<MyProps> = props => {
           {[
             <FundCounts datas={counts} />,
             <ETF datas={etf} />,
-            <FundTrend datas={trends} />,
-            <FundValues datas={values} />,
+            <FundTrends datas={trends} values={values} />,
+            // <FundValues datas={values} />,
             <FundRanks datas={ranks} />,
           ].map((it, i) => (
             <View key={i} style={{marginBottom: 12}}>

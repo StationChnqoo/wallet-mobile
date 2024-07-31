@@ -13,7 +13,7 @@ const FundValues: React.FC<MyProps> = props => {
   const {datas} = props;
 
   const myColor = (n: number) => {
-    let color = n > 0 ? 'red' : n < 0 ? 'green' : '#999';
+    let color = n > 0 ? utils.Colors.RED : n < 0 ? utils.Colors.GREEN : '#999';
     return color;
   };
 
@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     paddingVertical: 10,
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
   },
   viewItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 2,
+    marginVertical: utils.scale(2),
   },
   textName: {
     fontSize: utils.scale(14),

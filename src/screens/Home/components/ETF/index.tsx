@@ -65,9 +65,9 @@ const ETF: React.FC<MyProps> = props => {
                   colors: [
                     ...datas.map(it =>
                       it > 0
-                        ? processColor('#ff5252')
+                        ? processColor(utils.Colors.RED)
                         : it < 0
-                        ? processColor('green')
+                        ? processColor(utils.Colors.GREEN)
                         : processColor('#999'),
                     ),
                   ],

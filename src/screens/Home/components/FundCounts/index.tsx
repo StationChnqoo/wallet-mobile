@@ -45,7 +45,9 @@ const FundCounts: React.FC<MyProps> = props => {
             style={[
               styles.viewProgressBar,
               {
-                backgroundColor: ['red', 'green', '#999'][index],
+                backgroundColor: [utils.Colors.RED, utils.Colors.GREEN, '#999'][
+                  index
+                ],
                 flex: myPercent(it),
               },
             ]}

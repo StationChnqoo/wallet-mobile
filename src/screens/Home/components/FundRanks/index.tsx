@@ -13,7 +13,7 @@ const FundRanks: React.FC<MyProps> = props => {
   const {datas} = props;
 
   const myColor = (n: number) => {
-    let color = n > 0 ? 'red' : n < 0 ? 'green' : '#999';
+    let color = n > 0 ? utils.Colors.RED : n < 0 ? utils.Colors.GREEN : '#999';
     return color;
   };
   /**
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 2,
+    marginVertical: utils.scale(2),
   },
   textItemName: {
     fontSize: utils.scale(14),

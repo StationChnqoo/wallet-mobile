@@ -9,5 +9,11 @@ class Utils {
 
   SCREEN_WITH = Dimensions.get('screen').width;
   SCREEN_HEIGHT = Dimensions.get('screen').height;
+
+  Colors = {
+    // https://material.colorion.co/
+    RED: '#FF5252',
+    GREEN: '#689F38',
+  };
 }
 export {Utils};
