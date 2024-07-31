@@ -1,6 +1,9 @@
+import {Utils} from '@src/constants';
 import {FundsValue} from '@src/constants/Interfaces';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+
+const utils = new Utils();
 
 interface MyProps {
   datas: FundsValue[];
@@ -36,20 +39,22 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
     borderRadius: 8,
-    padding: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12
   },
   viewItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 4,
+    marginVertical: 2,
   },
   textName: {
-    fontSize: 16,
+    fontSize: utils.scale(14),
     color: '#333',
+    fontWeight: '500',
   },
   textZdf: {
-    fontSize: 14,
+    fontSize: utils.scale(14),
     // fontFamily: 'Dosis',
   },
 });

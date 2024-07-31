@@ -1,3 +1,4 @@
+import {Utils} from '@src/constants';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
@@ -8,6 +9,7 @@ interface MyProps {
 const FundCounts: React.FC<MyProps> = props => {
   const {datas} = props;
   const [sum, setSum] = useState(1);
+  const utils = new Utils();
 
   useEffect(() => {
     setSum(datas.reduce((count, it) => count + it));
@@ -18,12 +20,17 @@ const FundCounts: React.FC<MyProps> = props => {
 
   return (
     <View style={styles.view}>
+      <Text
+        style={{fontSize: utils.scale(16), fontWeight: '500', color: '#333'}}>
+        A股市场
+      </Text>
+      <View style={{height: 5}} />
       <View style={styles.viewCounts}>
         {datas.map((it, index) => (
           <Text
             key={index}
             style={{
-              fontSize: 14,
+              fontSize: utils.scale(14),
               color: ['red', 'green', '#999'][index],
             }}>{`${it}家 ${['↑', '↓', '-'][index]} ${myPercent(it).toFixed(
             2,

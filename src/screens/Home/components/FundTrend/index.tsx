@@ -53,7 +53,7 @@ const FundTrend: React.FC<MyProps> = props => {
               config: {
                 lineWidth: 1,
                 drawCircles: false,
-                drawValues: true,
+                drawValues: false,
                 drawLabel: false,
                 drawFilled: false, // 取消颜色块
                 color:
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
     borderRadius: 8,
-    padding: 12,
+    padding: 4,
     height: Dimensions.get('screen').width / 3,
   },
   viewGroup: {

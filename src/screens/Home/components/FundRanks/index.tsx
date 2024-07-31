@@ -1,6 +1,9 @@
+import {Utils} from '@src/constants';
 import {FundsRank} from '@src/constants/Interfaces';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+
+const utils = new Utils();
 
 interface MyProps {
   datas: FundsRank[];
@@ -22,7 +25,7 @@ const FundRanks: React.FC<MyProps> = props => {
     return (
       <View style={styles.viewGroup}>
         <Text style={styles.textGroupTitle}>{['涨', '跌'][index]}幅排行榜</Text>
-        <View style={{height: 8}} />
+        <View style={{height: 4}} />
         {items.map((it, index) => (
           <View key={index} style={styles.viewItem}>
             <Text
@@ -60,17 +63,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   textGroupTitle: {
-    fontSize: 16,
+    fontSize: utils.scale(16),
     fontWeight: '500',
+    color: '#333',
   },
   viewItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 5,
+    marginVertical: 2,
   },
   textItemName: {
-    fontSize: 14,
+    fontSize: utils.scale(14),
     flex: 1,
   },
 });

@@ -11,6 +11,7 @@ import FundCounts from './components/FundCounts';
 import FundValues from './components/FundValues';
 import FundRanks from './components/FundRanks';
 import FundTrend from './components/FundTrend';
+import ETF from './components/ETF';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -22,21 +23,28 @@ const HomeScreen: React.FC<MyProps> = props => {
   const [values, setValues] = useState<Types.FundsValue[]>([]);
   const [ranks, setRanks] = useState<Types.FundsRank[]>([]);
   const [trends, setTrends] = useState<number[]>([]);
+  const [etf, setEtf] = useState<number[]>([]);
 
-  useEffect(() => {
-    return function () {};
-  }, []);
+  useInterval(
+    () => {
+      initAllDatas();
+    },
+    timer,
+    {immediate: true},
+  );
 
-  useInterval(() => {
+  const initAllDatas = async () => {
     loadFundCounts();
     loadFundValues();
     loadFundRanks();
     loadFundTrends();
-  }, timer);
+    loadEtfDetails();
+  };
 
   useFocusEffect(
     useCallback(() => {
-      setTimer(2 * 1000);
+      initAllDatas();
+      setTimer(60 * 1000);
       return function () {
         setTimer(undefined);
       };
@@ -79,6 +87,28 @@ const HomeScreen: React.FC<MyProps> = props => {
     setTrends(_trends);
   };
 
+  const loadEtfDetails = async () => {
+    let codes = [
+      '159649', // 国开债ETF
+      '159972', // 5年地债ETF
+      '511010', // 国债ETF
+      '511020', // 活跃国债ETF
+      '511030', // 公司债ETF
+      '511060', // 5年地方债ETF
+      '511090', // 30年国债ETF
+      '511100', // 基准国债ETF
+      '511220', // 城投债ETF
+      '511260', // 十年国债ETF
+      '511270', // 十年地方债ETF
+    ];
+    let datas = [];
+    for (let i = 0; i < codes.length; i++) {
+      let result = await new Services().selectEtfDetail(codes[i]);
+      datas.push(result.data);
+    }
+    setEtf(datas.map(it => it.f170));
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
       <View
@@ -89,6 +119,7 @@ const HomeScreen: React.FC<MyProps> = props => {
           <View style={{height: 12}} />
           {[
             <FundCounts datas={counts} />,
+            <ETF datas={etf} />,
             <FundTrend datas={trends} />,
             <FundValues datas={values} />,
             <FundRanks datas={ranks} />,

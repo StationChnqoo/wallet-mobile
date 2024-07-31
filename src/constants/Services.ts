@@ -126,4 +126,12 @@ export default class Services {
     );
     return result.data;
   }
+
+  /**
+   * 场内ETF交易详情
+   * @param code
+   */
+  async selectEtfDetail(code: string) {
+    return await this.selectDfcfFundValues(code);
+  }
 }
