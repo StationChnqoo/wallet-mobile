@@ -25,7 +25,7 @@ const SuggestTips: React.FC<MyProps> = props => {
         style={styles.imageIcon}
       />
       <View style={{width: 8}} />
-      <Text style={styles.text}>您对货趴窝还满意吗😊？</Text>
+      <Text style={styles.text}>您对记账本还满意吗😊？</Text>
       <Button
         title={'去评价'}
         onPress={() => {}}
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    marginTop: 15,
     backgroundColor: '#fff',
     borderRadius: 8,
   },

@@ -43,7 +43,7 @@ const ToolBar: React.FC<MyProps> = props => {
             onBackPress?.();
           }}>
           <Image
-            source={require('@root/assets/common/row_back.png')}
+            source={require('@root/assets/common/arrow_left.png')}
             style={{height: IMAGE_SIZE, width: IMAGE_SIZE, tintColor: '#666'}}
           />
         </TouchableOpacity>

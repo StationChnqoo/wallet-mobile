@@ -3,7 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image} from 'react-native';
 import HomeScreen from '../Home';
-import MarketScreen from '../Market';
+
+import OrderScreen from '../Order';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,9 +18,9 @@ function MainScreen() {
     },
     {
       name: 'Hot',
-      component: MarketScreen,
-      icon: require('./assets/menu_fire.png'),
-      label: '热门',
+      component: OrderScreen,
+      icon: require('./assets/menu_order.png'),
+      label: '账单',
     },
     {
       name: 'Message',

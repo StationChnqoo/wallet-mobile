@@ -12,8 +12,16 @@ class Utils {
 
   Colors = {
     // https://material.colorion.co/
-    RED: '#FF5252',
+    RED: '#E53935',
     GREEN: '#689F38',
+    ORANGE: '#EF6C00',
+    PINK: '#F48FB1',
+    BLUE: '#2196F3',
+  };
+
+  Config = {
+    TOUCHABLE_OPACITY: 0.8,
   };
 }
+
 export {Utils};

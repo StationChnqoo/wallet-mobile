@@ -32,7 +32,7 @@ const FundCounts: React.FC<MyProps> = props => {
             style={{
               fontSize: utils.scale(14),
               color: ['red', 'green', '#999'][index],
-            }}>{`${it}家 ${['↑', '↓', '-'][index]} ${myPercent(it).toFixed(
+            }}>{`${it}家${['↑', '↓', ''][index]} ${myPercent(it * 100).toFixed(
             2,
           )}%`}</Text>
         ))}
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   viewProgressBar: {
-    height: 4,
-    borderRadius: 2,
+    height: 6,
+    borderRadius: 3,
     marginHorizontal: 2,
   },
 });

@@ -12,6 +12,7 @@ import FundCounts from './components/FundCounts';
 import FundRanks from './components/FundRanks';
 import FundTrends from './components/FundTrends';
 import FundValues from './components/FundValues';
+import SuggestTips from './components/SuggestTips';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -123,6 +124,7 @@ const HomeScreen: React.FC<MyProps> = props => {
             <FundTrends datas={trends} values={values} />,
             // <FundValues datas={values} />,
             <FundRanks datas={ranks} />,
+            <SuggestTips onClosePress={() => {}} />,
           ].map((it, i) => (
             <View key={i} style={{marginBottom: 12}}>
               {it}
