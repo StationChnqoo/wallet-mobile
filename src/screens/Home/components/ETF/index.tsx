@@ -41,15 +41,19 @@ const ETF: React.FC<MyProps> = props => {
   };
 
   const [average, setAverage] = useState(0);
+  const [usefulDatas, setUsefulDatas] = useState([]);
 
   useEffect(() => {
     let sum = 0;
-    for (let i = 0; i < datas.length; i++) {
-      sum += datas[i].f170;
+    let _datas = [...datas].filter(it => typeof it.f170 == 'number');
+
+    for (let i = 0; i < _datas.length; i++) {
+      sum += _datas[i].f170;
     }
-    if (datas.length > 0) {
-      setAverage(sum / datas.length);
+    if (_datas.length > 0) {
+      setAverage(sum / _datas.length);
     }
+    setUsefulDatas(_datas);
     return function () {};
   }, [datas]);
 
@@ -68,13 +72,19 @@ const ETF: React.FC<MyProps> = props => {
             style={{fontSize: 12, color: '#999'}}>{`估算均值：${average.toFixed(
             2,
           )}%`}</Text>
+          <Text
+            style={{
+              fontSize: 12,
+              color: '#999',
+            }}>{`有效数据：${usefulDatas.length} / ${datas.length}`}</Text>
         </View>
+
         <BarChart
           style={{flex: 1}}
           data={{
             dataSets: [
               {
-                values: [...datas].map(it => it.f170),
+                values: [...usefulDatas].map(it => it.f170),
                 // label: 'Zero line dataset',
                 config: {
                   colors: [

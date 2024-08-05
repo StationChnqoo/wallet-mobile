@@ -1,7 +1,8 @@
+import * as Types from '@src/constants/Interfaces';
+import moment from 'moment';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import MyChart from './components/MyChart';
-import * as Types from '@src/constants/Interfaces';
 
 interface MyProps {
   datas: number[][];
@@ -11,20 +12,30 @@ interface MyProps {
 const FundTrends: React.FC<MyProps> = props => {
   const {datas, values} = props;
   const titles = ['沪深300', '创业板指', '上证指数', '深证300'];
-  return datas.length > 0 ? (
+
+  const isNotTrading = () => {
+    let now = moment();
+    let start = moment().set({hour: 8, minute: 59, second: 59});
+    let end = moment().set({hour: 9, minute: 31, second: 0});
+    return now.isBetween(start, end);
+  };
+
+  return (
     <View style={styles.view}>
       <View style={styles.viewCharts}>
-        {Array.from({length: 4}, (_, i) => (
-          <MyChart
-            key={i}
-            title={titles[i]}
-            datas={datas[i]}
-            fund={values?.[i]}
-          />
-        ))}
+        {datas.length > 0 && !isNotTrading()
+          ? Array.from({length: 4}, (_, i) => (
+              <MyChart
+                key={i}
+                title={titles[i]}
+                datas={datas[i]}
+                fund={values?.[i]}
+              />
+            ))
+          : null}
       </View>
     </View>
-  ) : null;
+  );
 };
 
 const styles = StyleSheet.create({
