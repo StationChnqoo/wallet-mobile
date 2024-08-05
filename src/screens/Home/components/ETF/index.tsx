@@ -2,6 +2,7 @@ import {Utils} from '@src/constants';
 import React, {useEffect, useState} from 'react';
 import {processColor, StyleSheet, Text, View} from 'react-native';
 import {BarChart} from 'react-native-charts-wrapper';
+import moment from 'moment';
 
 const utils = new Utils();
 
@@ -31,15 +32,19 @@ const ETF: React.FC<MyProps> = props => {
   };
 
   const [average, setAverage] = useState(0);
+  const [usefulDatas, setUsefulDatas] = useState([]);
 
   useEffect(() => {
     let sum = 0;
-    for (let i = 0; i < datas.length; i++) {
-      sum += datas[i];
+    let _datas = [...datas].filter(it => typeof it == 'number');
+
+    for (let i = 0; i < _datas.length; i++) {
+      sum += _datas[i];
     }
-    if (datas.length > 0) {
-      setAverage(sum / datas.length);
+    if (_datas.length > 0) {
+      setAverage(sum / _datas.length);
     }
+    setUsefulDatas(_datas);
     return function () {};
   }, [datas]);
 
@@ -53,17 +58,23 @@ const ETF: React.FC<MyProps> = props => {
             style={{fontSize: 12, color: '#999'}}>{`估算均值：${average.toFixed(
             2,
           )}%`}</Text>
+          <Text
+            style={{
+              fontSize: 12,
+              color: '#999',
+            }}>{`有效数据：${usefulDatas.length} / ${datas.length}`}</Text>
         </View>
+
         <BarChart
           style={{flex: 1}}
           data={{
             dataSets: [
               {
-                values: [...datas],
+                values: [...usefulDatas],
                 // label: 'Zero line dataset',
                 config: {
                   colors: [
-                    ...datas.map(it =>
+                    ...usefulDatas.map(it =>
                       it > 0
                         ? processColor(utils.Colors.RED)
                         : it < 0
