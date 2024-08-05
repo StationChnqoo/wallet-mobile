@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import SearchBar from './SearchBar';
+import SearchBar from './components/SearchBar';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -12,6 +12,7 @@ interface MyProps {
 const OrderScreen: React.FC<MyProps> = props => {
   const [keyword, setKeyword] = useState('');
   const [filterStatus, setFilterStatus] = useState(false);
+  const [filters, setFilters] = useState([]);
 
   return (
     <View style={{flex: 1, backgroundColor: '#fafafa'}}>
@@ -23,7 +24,7 @@ const OrderScreen: React.FC<MyProps> = props => {
           setFilterStatus(!filterStatus);
         }}
         onSearchPress={() => {}}
-        filterStatus={filterStatus}
+        filters={filters}
       />
     </View>
   );

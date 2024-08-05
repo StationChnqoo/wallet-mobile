@@ -1,16 +1,26 @@
 import {Utils} from '@src/constants';
 import React, {useEffect, useState} from 'react';
-import {processColor, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  processColor,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {BarChart} from 'react-native-charts-wrapper';
+import ETFDetailModal from '../ETFDetailModal';
+import {FundsValue} from '@src/constants/Interfaces';
 
 const utils = new Utils();
 
 interface MyProps {
-  datas: number[];
+  datas: FundsValue[];
 }
 
 const ETF: React.FC<MyProps> = props => {
   const {datas} = props;
+  const [isShowDetailModal, setIsShowDetailModal] = useState(false);
 
   const xAxis = {
     enabled: false,
@@ -35,7 +45,7 @@ const ETF: React.FC<MyProps> = props => {
   useEffect(() => {
     let sum = 0;
     for (let i = 0; i < datas.length; i++) {
-      sum += datas[i];
+      sum += datas[i].f170;
     }
     if (datas.length > 0) {
       setAverage(sum / datas.length);
@@ -45,7 +55,12 @@ const ETF: React.FC<MyProps> = props => {
 
   return (
     <View style={styles.view}>
-      <View style={{height: utils.scale(58), flexDirection: 'row'}}>
+      <View
+        style={{
+          height: utils.scale(58),
+          flexDirection: 'row',
+          position: 'relative',
+        }}>
         <View>
           <Text style={styles.textTitle}>场内ETF</Text>
           <View style={{height: 4}} />
@@ -59,14 +74,14 @@ const ETF: React.FC<MyProps> = props => {
           data={{
             dataSets: [
               {
-                values: [...datas],
+                values: [...datas].map(it => it.f170),
                 // label: 'Zero line dataset',
                 config: {
                   colors: [
                     ...datas.map(it =>
-                      it > 0
+                      it.f170 > 0
                         ? processColor(utils.Colors.RED)
-                        : it < 0
+                        : it.f170 < 0
                         ? processColor(utils.Colors.GREEN)
                         : processColor('#999'),
                     ),
@@ -80,7 +95,35 @@ const ETF: React.FC<MyProps> = props => {
           chartDescription={{text: ''}}
           legend={{enabled: false}}
         />
+        <TouchableOpacity
+          style={{position: 'absolute', right: 0, top: 0}}
+          onPress={() => {
+            setIsShowDetailModal(!isShowDetailModal);
+          }}
+          activeOpacity={utils.Config.TOUCHABLE_OPACITY}
+          hitSlop={{
+            bottom: 12,
+            top: 12,
+            left: 12,
+            right: 12,
+          }}>
+          <Image
+            source={require('../assets/info.png')}
+            style={{
+              height: utils.scale(16),
+              width: utils.scale(16),
+              tintColor: '#666',
+            }}
+          />
+        </TouchableOpacity>
       </View>
+      <ETFDetailModal
+        show={isShowDetailModal}
+        datas={datas}
+        onClosePress={() => {
+          setIsShowDetailModal(!isShowDetailModal);
+        }}
+      />
     </View>
   );
 };

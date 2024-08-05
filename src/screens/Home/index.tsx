@@ -24,7 +24,7 @@ const HomeScreen: React.FC<MyProps> = props => {
   const [values, setValues] = useState<Types.FundsValue[]>([]);
   const [ranks, setRanks] = useState<Types.FundsRank[]>([]);
   const [trends, setTrends] = useState<number[][]>(Array(4).fill([]));
-  const [etf, setEtf] = useState<number[]>([]);
+  const [etf, setEtf] = useState<Types.FundsValue[]>([]);
 
   const init = async () => {
     loadFundCounts();
@@ -107,7 +107,7 @@ const HomeScreen: React.FC<MyProps> = props => {
       let result = await new Services().selectEtfDetail(codes[i]);
       datas.push(result.data);
     }
-    setEtf(datas.map(it => it.f170));
+    setEtf(datas);
   };
 
   return (
