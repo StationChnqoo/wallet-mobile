@@ -35,7 +35,7 @@ const ETFDetailModal: React.FC<MyProps> = props => {
               <View style={{width: 4}} />
               <Text
                 style={{fontSize: utils.scale(14), color: myColor(it.f170)}}>
-                {(it.f170 / 2).toFixed(2)}%
+                {it.f170 || 0}🥚
               </Text>
             </View>
           ))}

@@ -12,7 +12,7 @@ const FundCounts: React.FC<MyProps> = props => {
   const utils = new Utils();
 
   useEffect(() => {
-    setSum(datas.reduce((count, it) => count + it));
+    setSum(datas.reduce((count, it) => count + it) || 1);
     return function () {};
   }, [datas]);
 

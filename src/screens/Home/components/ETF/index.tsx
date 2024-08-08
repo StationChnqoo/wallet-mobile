@@ -102,11 +102,12 @@ const ETF: React.FC<MyProps> = props => {
           }}
           xAxis={xAxis}
           yAxis={yAxis}
+          scaleEnabled={false}
           chartDescription={{text: ''}}
           legend={{enabled: false}}
         />
         <TouchableOpacity
-          style={{position: 'absolute', right: 0, top: 0}}
+          // style={{position: 'absolute', right: 0, top: 0}}
           onPress={() => {
             setIsShowDetailModal(!isShowDetailModal);
           }}

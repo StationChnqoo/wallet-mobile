@@ -4,6 +4,8 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
 import SearchBar from './components/SearchBar';
+import BottomSheet from '@src/components/BottomSheet';
+import FilterModal from './components/FilterModal';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -13,6 +15,7 @@ const OrderScreen: React.FC<MyProps> = props => {
   const [keyword, setKeyword] = useState('');
   const [filterStatus, setFilterStatus] = useState(false);
   const [filters, setFilters] = useState([]);
+  const [isShowFilterModal, setIsShowFilterModal] = useState(false);
 
   return (
     <View style={{flex: 1, backgroundColor: '#fafafa'}}>
@@ -22,9 +25,16 @@ const OrderScreen: React.FC<MyProps> = props => {
       <SearchBar
         onFilterPress={() => {
           setFilterStatus(!filterStatus);
+          setIsShowFilterModal(true);
         }}
         onSearchPress={() => {}}
         filters={filters}
+      />
+      <FilterModal
+        show={isShowFilterModal}
+        onClose={() => {
+          setIsShowFilterModal(false);
+        }}
       />
     </View>
   );

@@ -1,7 +1,7 @@
 import * as Types from '@src/constants/Interfaces';
 import moment from 'moment';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import MyChart from './components/MyChart';
 
 interface MyProps {
@@ -22,18 +22,18 @@ const FundTrends: React.FC<MyProps> = props => {
 
   return (
     <View style={styles.view}>
-      <View style={styles.viewCharts}>
-        {datas.length > 0 && !isNotTrading()
-          ? Array.from({length: 4}, (_, i) => (
-              <MyChart
-                key={i}
-                title={titles[i]}
-                datas={datas[i]}
-                fund={values?.[i]}
-              />
-            ))
-          : null}
-      </View>
+      {datas.length > 0 && !isNotTrading() ? (
+        <View style={styles.viewCharts}>
+          {Array.from({length: 4}, (_, i) => (
+            <MyChart
+              key={i}
+              title={titles[i]}
+              datas={datas[i]}
+              fund={values?.[i]}
+            />
+          ))}
+        </View>
+      ) : null}
     </View>
   );
 };
