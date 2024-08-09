@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 2,
+    marginRight: utils.scale(16),
     marginVertical: 4,
   },
 });
