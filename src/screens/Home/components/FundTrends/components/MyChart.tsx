@@ -1,9 +1,8 @@
-import {Utils} from '@src/constants';
 import {FundsValue} from '@src/constants/Interfaces';
+import x from '@src/constants/x';
 import React from 'react';
 import {processColor, StyleSheet, Text, View} from 'react-native';
 import {LineChart} from 'react-native-charts-wrapper';
-const utils = new Utils();
 
 interface MyProps {
   title: string;
@@ -14,7 +13,7 @@ interface MyProps {
 const MyChart: React.FC<MyProps> = props => {
   const {title, datas, fund} = props;
   const myColor = (n: number) => {
-    let color = n > 0 ? utils.Colors.RED : n < 0 ? utils.Colors.GREEN : '#999';
+    let color = n > 0 ? x.Color.RED : n < 0 ? x.Color.GREEN : '#999';
     return color;
   };
 
@@ -32,10 +31,10 @@ const MyChart: React.FC<MyProps> = props => {
       yOffset: 0,
       labelCount: 6,
       position: 'OUTSIDE_CHART',
-      textSize: utils.scale(10),
+      textSize: x.scale(10),
     },
   };
-  const x = {
+  const xAlias = {
     enabled: false,
     drawAxisLine: true,
     drawGridLines: true,
@@ -47,26 +46,24 @@ const MyChart: React.FC<MyProps> = props => {
     avoidFirstLastClipping: true,
   };
   return datas.length > 0 ? (
-    <View style={{width: (utils.SCREEN_WITH - 48) / 2 - 12}}>
+    <View style={{width: (x.WIDTH - 48) / 2 - 12}}>
       <View style={styles.view}>
-        <Text
-          style={{fontSize: utils.scale(14), color: '#333', fontWeight: '500'}}>
+        <Text style={{fontSize: x.scale(14), color: '#333', fontWeight: '500'}}>
           {title}
         </Text>
-        <Text
-          style={{color: myColor(fund?.f170 || 0), fontSize: utils.scale(12)}}>
+        <Text style={{color: myColor(fund?.f170 || 0), fontSize: x.scale(12)}}>
           {((fund?.f170 || 0) / 100).toFixed(2)}%
         </Text>
       </View>
       <View
         style={{
-          height: utils.scale(88),
+          height: x.scale(88),
           flex: 1,
         }}>
         <LineChart
           style={{flex: 1, margin: 0, padding: 0}}
           yAxis={y}
-          xAxis={x}
+          xAxis={xAlias}
           legend={{enabled: false}} // 隐藏颜色块的标记
           chartDescription={{text: `${((fund?.f43 || 0) / 100).toFixed(2)}`}}
           scaleEnabled={false}
@@ -83,9 +80,9 @@ const MyChart: React.FC<MyProps> = props => {
                   drawFilled: false, // 取消颜色块
                   color:
                     datas[datas.length - 1] > datas[0]
-                      ? processColor(utils.Colors.RED)
+                      ? processColor(x.Color.RED)
                       : datas[datas.length - 1] < datas[0]
-                      ? processColor(utils.Colors.GREEN)
+                      ? processColor(x.Color.GREEN)
                       : processColor('#999'),
                 },
               },

@@ -7,7 +7,7 @@ interface MyProps {
   datas: number[];
 }
 
-const FundCounts: React.FC<MyProps> = props => {
+const Income: React.FC<MyProps> = props => {
   const {datas} = props;
   const [sum, setSum] = useState(1);
 
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FundCounts;
+export default Income;

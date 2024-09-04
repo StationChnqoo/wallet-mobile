@@ -1,10 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
-import {Utils} from '@src/constants';
 import BottomSheet from '@src/components/BottomSheet';
-
-const utils = new Utils();
+import x from '@src/constants/x';
 
 interface MyProps {
   show: boolean;
@@ -26,13 +24,13 @@ const FilterModal: React.FC<MyProps> = props => {
 const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
-    paddingHorizontal: utils.scale(16),
-    paddingVertical: utils.scale(16),
+    paddingHorizontal: x.scale(16),
+    paddingVertical: x.scale(16),
     flexDirection: 'row',
     alignItems: 'center',
   },
   textTitle: {
-    fontSize: utils.scale(18),
+    fontSize: x.scale(18),
     color: '#333',
     fontWeight: '500',
   },

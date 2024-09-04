@@ -9,7 +9,7 @@ interface States {
   setTheme: (theme: string) => void;
 }
 
-const useStore = create<States>()(
+const useCaches = create<States>()(
   devtools(
     persist(
       set => ({
@@ -20,7 +20,7 @@ const useStore = create<States>()(
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
-        name: 'useStore.ts',
+        name: 'useCaches.ts',
         /** 白名单 */
         partialize: state => ({
           bears: state.bears,
@@ -31,4 +31,4 @@ const useStore = create<States>()(
   ),
 );
 
-export {useStore};
+export {useCaches};

@@ -1,5 +1,5 @@
-import React, {useCallback, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {useFocusEffect} from '@react-navigation/native';
 import * as Types from '@src/constants/Interfaces';
@@ -11,13 +11,13 @@ import ETF from './components/ETF';
 import FundCounts from './components/FundCounts';
 import FundRanks from './components/FundRanks';
 import FundTrends from './components/FundTrends';
-import FundValues from './components/FundValues';
 import SuggestTips from './components/SuggestTips';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
+const SECONDS = 10;
 const HomeScreen: React.FC<MyProps> = props => {
   const [counts, setCounts] = useState<number[]>(Array(3).fill(1));
   const [timer, setTimer] = useState<undefined | number>(undefined);
@@ -25,6 +25,7 @@ const HomeScreen: React.FC<MyProps> = props => {
   const [ranks, setRanks] = useState<Types.FundsRank[]>([]);
   const [trends, setTrends] = useState<number[][]>(Array(4).fill([]));
   const [etf, setEtf] = useState<Types.FundsValue[]>([]);
+  const [seconds, setSeconds] = useState(0);
 
   const init = async () => {
     loadFundCounts();
@@ -34,13 +35,20 @@ const HomeScreen: React.FC<MyProps> = props => {
     loadEtfDetails();
   };
   useInterval(() => {
-    init();
+    setSeconds(t => (t + 1) % SECONDS);
   }, timer);
+
+  useEffect(() => {
+    if (seconds == 0) {
+      init();
+    }
+    return function () {};
+  }, [seconds]);
 
   useFocusEffect(
     useCallback(() => {
       init();
-      setTimer(60 * 1000);
+      setTimer(1000);
       return function () {
         setTimer(undefined);
       };
@@ -111,7 +119,7 @@ const HomeScreen: React.FC<MyProps> = props => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
+    <View style={{flex: 1, backgroundColor: '#f0f0f0', position: 'relative'}}>
       <View
         style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
       />
@@ -132,10 +140,32 @@ const HomeScreen: React.FC<MyProps> = props => {
           ))}
         </View>
       </ScrollView>
+      <View style={styles.seconds}>
+        <Text style={styles.textSeconds}>{`下一轮刷新 ${
+          SECONDS - seconds
+        }秒`}</Text>
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  seconds: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 4,
+    right: 4,
+    borderTopLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  textSeconds: {
+    fontSize: 12,
+    color: 'white',
+  },
+});
 
 export default HomeScreen;

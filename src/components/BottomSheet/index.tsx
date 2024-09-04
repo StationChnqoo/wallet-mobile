@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     backgroundColor: 'white',
-    // margin: utils.scale(12),
   },
 });
 

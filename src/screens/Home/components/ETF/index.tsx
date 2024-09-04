@@ -1,4 +1,5 @@
-import {Utils} from '@src/constants';
+import {FundsValue} from '@src/constants/Interfaces';
+import x from '@src/constants/x';
 import React, {useEffect, useState} from 'react';
 import {
   Image,
@@ -10,9 +11,6 @@ import {
 } from 'react-native';
 import {BarChart} from 'react-native-charts-wrapper';
 import ETFDetailModal from '../ETFDetailModal';
-import {FundsValue} from '@src/constants/Interfaces';
-
-const utils = new Utils();
 
 interface MyProps {
   datas: FundsValue[];
@@ -61,7 +59,7 @@ const ETF: React.FC<MyProps> = props => {
     <View style={styles.view}>
       <View
         style={{
-          height: utils.scale(58),
+          height: x.scale(58),
           flexDirection: 'row',
           position: 'relative',
         }}>
@@ -90,9 +88,9 @@ const ETF: React.FC<MyProps> = props => {
                   colors: [
                     ...datas.map(it =>
                       it.f170 > 0
-                        ? processColor(utils.Colors.RED)
+                        ? processColor(x.Color.RED)
                         : it.f170 < 0
-                        ? processColor(utils.Colors.GREEN)
+                        ? processColor(x.Color.GREEN)
                         : processColor('#999'),
                     ),
                   ],
@@ -111,7 +109,7 @@ const ETF: React.FC<MyProps> = props => {
           onPress={() => {
             setIsShowDetailModal(!isShowDetailModal);
           }}
-          activeOpacity={utils.Config.TOUCHABLE_OPACITY}
+          activeOpacity={x.Touchable.OPACITY}
           hitSlop={{
             bottom: 12,
             top: 12,
@@ -121,8 +119,8 @@ const ETF: React.FC<MyProps> = props => {
           <Image
             source={require('../assets/info.png')}
             style={{
-              height: utils.scale(16),
-              width: utils.scale(16),
+              height: x.scale(16),
+              width: x.scale(16),
               tintColor: '#666',
             }}
           />
@@ -156,7 +154,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   textTitle: {
-    fontSize: utils.scale(16),
+    fontSize: x.scale(16),
     fontWeight: '500',
     color: '#333',
   },

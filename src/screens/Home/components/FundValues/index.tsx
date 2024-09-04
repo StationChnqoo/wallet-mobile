@@ -1,9 +1,7 @@
-import {Utils} from '@src/constants';
 import {FundsValue} from '@src/constants/Interfaces';
+import x from '@src/constants/x';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-
-const utils = new Utils();
 
 interface MyProps {
   datas: FundsValue[];
@@ -13,7 +11,7 @@ const FundValues: React.FC<MyProps> = props => {
   const {datas} = props;
 
   const myColor = (n: number) => {
-    let color = n > 0 ? utils.Colors.RED : n < 0 ? utils.Colors.GREEN : '#999';
+    let color = n > 0 ? x.Color.RED : n < 0 ? x.Color.GREEN : '#999';
     return color;
   };
 
@@ -46,15 +44,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: utils.scale(2),
+    marginVertical: x.scale(2),
   },
   textName: {
-    fontSize: utils.scale(14),
+    fontSize: x.scale(14),
     color: '#333',
     fontWeight: '500',
   },
   textZdf: {
-    fontSize: utils.scale(14),
+    fontSize: x.scale(14),
     // fontFamily: 'Dosis',
   },
 });

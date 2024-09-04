@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-import {Utils} from '@src/constants';
-
-const utils = new Utils();
+import x from '@src/constants/x';
 
 interface MyProps {
   onSearchPress: () => void;
@@ -13,13 +11,13 @@ interface MyProps {
 
 const SearchBar: React.FC<MyProps> = props => {
   const {onSearchPress, onFilterPress, filters} = props;
-  const color = filters.length == 0 ? '#333' : utils.Colors.BLUE;
+  const color = filters.length == 0 ? '#333' : x.Color.BLUE;
 
   return (
     <View style={styles.view}>
       <TouchableOpacity
         style={{flexDirection: 'row', flex: 1}}
-        activeOpacity={utils.Config.TOUCHABLE_OPACITY}
+        activeOpacity={x.Touchable.OPACITY}
         onPress={onSearchPress}>
         <View
           style={styles.textInput}
@@ -30,8 +28,8 @@ const SearchBar: React.FC<MyProps> = props => {
             <Image
               source={require('./assets/zoom.png')}
               style={{
-                height: utils.scale(18),
-                width: utils.scale(18),
+                height: x.scale(18),
+                width: x.scale(18),
                 tintColor: '#999',
               }}
             />
@@ -48,10 +46,10 @@ const SearchBar: React.FC<MyProps> = props => {
       <TouchableOpacity
         onPress={onFilterPress}
         style={{flexDirection: 'row', alignItems: 'flex-end'}}
-        activeOpacity={utils.Config.TOUCHABLE_OPACITY}>
+        activeOpacity={x.Touchable.OPACITY}>
         <Text
           style={{
-            fontSize: utils.scale(14),
+            fontSize: x.scale(14),
             color,
           }}>
           筛选
@@ -60,7 +58,7 @@ const SearchBar: React.FC<MyProps> = props => {
           {filters.length > 0 ? (
             <Text
               style={{
-                fontSize: utils.scale(12),
+                fontSize: x.scale(12),
                 color,
               }}>
               {filters.length}
@@ -70,8 +68,8 @@ const SearchBar: React.FC<MyProps> = props => {
           <Image
             source={require('@root/assets/common/arrow_bottom_right.png')}
             style={{
-              height: utils.scale(6),
-              width: utils.scale(6),
+              height: x.scale(6),
+              width: x.scale(6),
               marginLeft: 2,
               tintColor: color,
             }}
@@ -86,14 +84,14 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
     paddingHorizontal: 12,
-    paddingVertical: utils.scale(10),
+    paddingVertical: x.scale(10),
     flexDirection: 'row',
     alignItems: 'center',
   },
   textInput: {
-    fontSize: utils.scale(16),
+    fontSize: x.scale(16),
     borderWidth: 1,
-    borderRadius: utils.scale(10),
+    borderRadius: x.scale(10),
     // paddingVertical: Platform.select({android: 1, ios: 4}),
     // paddingVertical: 0,
     paddingHorizontal: 12,
@@ -101,18 +99,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     borderColor: '#eee',
-    height: utils.scale(36),
+    height: x.scale(36),
     alignItems: 'center',
     backgroundColor: 'white',
   },
   textHint: {
-    fontSize: utils.scale(16),
+    fontSize: x.scale(16),
     color: '#999',
   },
   viewLine: {
     width: 1,
     backgroundColor: '#ccc',
-    height: utils.scale(24),
+    height: x.scale(24),
     marginHorizontal: 12,
   },
 });

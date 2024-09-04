@@ -1,9 +1,7 @@
-import {Utils} from '@src/constants';
 import {FundsRank} from '@src/constants/Interfaces';
+import x from '@src/constants/x';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-
-const utils = new Utils();
 
 interface MyProps {
   datas: FundsRank[];
@@ -13,7 +11,7 @@ const FundRanks: React.FC<MyProps> = props => {
   const {datas} = props;
 
   const myColor = (n: number) => {
-    let color = n > 0 ? utils.Colors.RED : n < 0 ? utils.Colors.GREEN : '#999';
+    let color = n > 0 ? x.Color.RED : n < 0 ? x.Color.GREEN : '#999';
     return color;
   };
   /**
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   textGroupTitle: {
-    fontSize: utils.scale(16),
+    fontSize: x.scale(16),
     fontWeight: '500',
     color: '#333',
   },
@@ -71,10 +69,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: utils.scale(2),
+    marginVertical: x.scale(2),
   },
   textItemName: {
-    fontSize: utils.scale(14),
+    fontSize: x.scale(14),
     flex: 1,
   },
 });

@@ -5,6 +5,7 @@ import {Image} from 'react-native';
 import HomeScreen from '../Home';
 
 import OrderScreen from '../Order';
+import My from '../My';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ function MainScreen() {
     },
     {
       name: 'Me',
-      component: HomeScreen,
+      component: My,
       icon: require('./assets/menu_me.png'),
       label: '我的',
     },
