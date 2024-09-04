@@ -21,24 +21,30 @@ const ETFDetailModal: React.FC<MyProps> = props => {
 
   return (
     <Modal
-      animationIn={'fadeIn'}
-      animationOut={'fadeOut'}
+      animationIn={'zoomIn'}
+      animationOut={'zoomOut'}
+      animationInTiming={618}
+      animationOutTiming={618}
+      useNativeDriver={true}
+      hideModalContentWhileAnimating={true}
       isVisible={show}
       onBackdropPress={onClosePress}>
       <View style={styles.view}>
         <View style={styles.items}>
-          {datas.map((it, i) => (
-            <View key={i} style={styles.item}>
-              <Text style={{fontSize: utils.scale(14), color: '#333'}}>
-                {it.f58}：
-              </Text>
-              <View style={{width: 4}} />
-              <Text
-                style={{fontSize: utils.scale(14), color: myColor(it.f170)}}>
-                {it.f170 || 0}🥚
-              </Text>
-            </View>
-          ))}
+          {[...datas]
+            .sort((a, b) => a.f170 - b.f170)
+            .map((it, i) => (
+              <View key={i} style={styles.item}>
+                <Text style={{fontSize: utils.scale(14), color: '#333'}}>
+                  {it.f58}：
+                </Text>
+                <View style={{width: 4}} />
+                <Text
+                  style={{fontSize: utils.scale(14), color: myColor(it.f170)}}>
+                  {it.f170 || 0}🥚
+                </Text>
+              </View>
+            ))}
         </View>
       </View>
     </Modal>
@@ -49,20 +55,21 @@ const styles = StyleSheet.create({
   view: {
     borderRadius: 12,
     backgroundColor: 'white',
-    padding: 12,
-    margin: utils.scale(12),
+    padding: utils.scale(12),
+    // margin: utils.scale(12),
   },
   items: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: 'white',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    // flexWrap: 'wrap',
+    // justifyContent: 'space-between',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 2,
     marginVertical: 4,
+    justifyContent: 'space-between',
   },
 });
 
