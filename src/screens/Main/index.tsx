@@ -6,10 +6,12 @@ import HomeScreen from '../Home';
 
 import OrderScreen from '../Order';
 import My from '../My';
+import {useCaches} from '@src/stores';
 
 const Tab = createBottomTabNavigator();
 
 function MainScreen() {
+  const {theme} = useCaches();
   const screens = [
     {
       name: 'Home',
@@ -52,6 +54,7 @@ function MainScreen() {
           options={{
             headerShown: false,
             tabBarLabel: it.label,
+            tabBarActiveTintColor: theme,
             tabBarIcon: ({color}) => (
               <Image
                 source={it.icon}

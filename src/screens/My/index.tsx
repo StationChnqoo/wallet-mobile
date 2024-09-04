@@ -1,9 +1,10 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import MarketItem from '@src/components/MarketItem';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
+import Stocks from './components/Stocks';
+import Color from './components/Color';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -15,10 +16,15 @@ const My: React.FC<MyProps> = props => {
       <View
         style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
       />
-      <FlatList
-        data={Array.from({length: 10}, _ => `${_}`)}
-        renderItem={info => <MarketItem />}
-      />
+      <ScrollView>
+        <View style={{flex: 1}}>
+          {[<Stocks />, <Color />].map((it, i) => (
+            <View key={i} style={{marginVertical: 6}}>
+              {it}
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };

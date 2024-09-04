@@ -22,14 +22,14 @@ const Card: React.FC<MyProps> = props => {
 
 const styles = StyleSheet.create({
   view: {
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
     marginHorizontal: 12,
     borderRadius: 12,
     backgroundColor: '#fff',
-    marginVertical: 6,
   },
   text: {
-    fontSize: x.scale(18),
+    fontSize: x.scale(16),
     fontWeight: '500',
     color: '#333',
   },
