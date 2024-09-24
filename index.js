@@ -3,6 +3,7 @@ import {AppRegistry, StatusBar, View} from 'react-native';
 import {name as appName} from './app.json';
 import Screens from './src/screens';
 import {useStore} from './src/stores';
+import {RootSiblingParent} from 'react-native-root-siblings';
 
 const StoreContext = createContext();
 
@@ -11,16 +12,18 @@ const Wallet = () => {
 
   return (
     <StoreContext.Provider value={useStore}>
-      <View style={{flex: 1}}>
-        {/* <StatusBar
+      <RootSiblingParent>
+        <View style={{flex: 1}}>
+          {/* <StatusBar
           translucent={true}
           barStyle={'dark-content'}
           backgroundColor={'white'}
         /> */}
-        <View style={{flex: 1, position: 'relative'}}>
-          <Screens />
+          <View style={{flex: 1, position: 'relative'}}>
+            <Screens />
+          </View>
         </View>
-      </View>
+      </RootSiblingParent>
     </StoreContext.Provider>
   );
 };

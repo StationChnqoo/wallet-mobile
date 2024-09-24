@@ -20,7 +20,7 @@ const Secret: React.FC<MyProps> = props => {
         <Switch
           value={isDidiao}
           onValueChange={() => setIsDidiao(!isDidiao)}
-          thumbColor={theme}
+          thumbColor={isDidiao ? theme : '#999'}
           trackColor={{false: '#ccc', true: x.Colors.hex2Rgba(theme, 0.58)}}
         />
       </View>

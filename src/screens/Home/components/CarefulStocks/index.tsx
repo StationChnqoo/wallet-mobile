@@ -21,7 +21,7 @@ const CarefulStocks: React.FC<MyProps> = props => {
         style={{
           position: 'relative',
         }}>
-        <Text style={styles.textTitle}>持仓</Text>
+        <Text style={styles.textTitle}>关注</Text>
         <View style={{height: 4}} />
         {datas.map((stock, i) => (
           <View style={styles.stock} key={i}>

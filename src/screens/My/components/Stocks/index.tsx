@@ -1,5 +1,6 @@
 import x from '@src/constants/x';
-import React, {useEffect, useState} from 'react';
+import {useCaches} from '@src/stores';
+import React from 'react';
 import {
   Alert,
   Image,
@@ -9,14 +10,12 @@ import {
   View,
 } from 'react-native';
 import Card from '../Card';
-import {useCaches} from '@src/stores';
 
 interface MyProps {
   onNewStockPress: () => void;
 }
 
 const Stocks: React.FC<MyProps> = props => {
-  const [tab, setTab] = useState(0);
   const {onNewStockPress} = props;
   const {theme} = useCaches();
   const {carefulStocks, setCarefulStocks} = useCaches();
@@ -36,13 +35,25 @@ const Stocks: React.FC<MyProps> = props => {
       },
     ]);
   };
-  useEffect(() => {
-    return function () {};
-  }, []);
+
+  const onMovePress = (n: number, index: number) => {
+    if (
+      (n == -1 && index == 0) ||
+      (n == 1 && index == carefulStocks.length - 1)
+    ) {
+      // 越界
+    } else {
+      let datas = [...carefulStocks];
+      let t = datas[index];
+      datas[index] = datas[index + n];
+      datas[index + n] = t;
+      setCarefulStocks([...carefulStocks]);
+    }
+  };
 
   return (
     <Card
-      title={'我的持仓'}
+      title={'我的关注'}
       moreView={
         <View>
           <TouchableOpacity
@@ -86,9 +97,26 @@ const Stocks: React.FC<MyProps> = props => {
               <View style={x.Styles.rowCenter()}>
                 <TouchableOpacity
                   activeOpacity={x.Touchable.OPACITY}
-                  onPress={() => {}}>
+                  onPress={() => {
+                    onMovePress(-1, i);
+                  }}>
                   <Image
-                    source={require('../../assets/edit.png')}
+                    source={require('@root/assets/common/move_up.png')}
+                    style={{
+                      height: x.scale(18),
+                      width: x.scale(18),
+                      tintColor: theme,
+                    }}
+                  />
+                </TouchableOpacity>
+                <View style={{width: 12}} />
+                <TouchableOpacity
+                  activeOpacity={x.Touchable.OPACITY}
+                  onPress={() => {
+                    onMovePress(1, i);
+                  }}>
+                  <Image
+                    source={require('@root/assets/common/move_down.png')}
                     style={{
                       height: x.scale(18),
                       width: x.scale(18),

@@ -9,6 +9,7 @@ import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
 import {RootStacksParams, RootStacksProp} from '..';
 import Services from '@src/constants/Services';
+import Toaster from '@src/constants/Toaster';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -34,7 +35,7 @@ const EditStock: React.FC<MyProps> = props => {
 
   const onConfirmPress = () => {
     if (carefulStocks.some(it => it.f57 == stock.f57)) {
-      Alert.alert('提示', '此股票已在自选列表中 ~', [{text: '确定'}]);
+      Toaster.show('此股票已在自选列表中 ~');
     } else {
       setCarefulStocks([...carefulStocks, stock]);
       navigation.goBack();
