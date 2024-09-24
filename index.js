@@ -12,11 +12,11 @@ const Wallet = () => {
   return (
     <StoreContext.Provider value={useStore}>
       <View style={{flex: 1}}>
-        <StatusBar
+        {/* <StatusBar
           translucent={true}
           barStyle={'dark-content'}
           backgroundColor={'white'}
-        />
+        /> */}
         <View style={{flex: 1, position: 'relative'}}>
           <Screens />
         </View>

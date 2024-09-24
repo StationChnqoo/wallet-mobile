@@ -50,6 +50,18 @@ const Fonts = {
   NotoSerifJP: 'NotoSerifJP-Medium',
 };
 
+const Colors = {
+  hex2Rgba: (hex: string, alpha?: number) => {
+    // 去除 # 号
+    hex = hex.replace('#', '');
+    // 将 hex 转换为 rgba
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha || 1})`;
+  },
+};
+
 const Color = {
   PAGE: '#f0f0f0',
   RED: '#ff2121',
@@ -283,6 +295,7 @@ const x = {
   Links,
   COLORS,
   Files,
+  Colors,
 };
 
 export default x;

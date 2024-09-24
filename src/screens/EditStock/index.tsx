@@ -1,31 +1,24 @@
 import React from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 
+import MarketItem from '@src/components/MarketItem';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import Stocks from './components/Stocks';
-import Color from './components/Color';
-import Secret from './components/Secret';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
-const My: React.FC<MyProps> = props => {
+const EditStock: React.FC<MyProps> = props => {
   return (
     <View style={{flex: 1}}>
       <View
         style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
       />
-      <ScrollView>
-        <View style={{flex: 1}}>
-          {[<Stocks />, <Color />, <Secret />].map((it, i) => (
-            <View key={i} style={{marginVertical: 6}}>
-              {it}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <FlatList
+        data={Array.from({length: 10}, _ => `${_}`)}
+        renderItem={info => <MarketItem />}
+      />
     </View>
   );
 };
@@ -49,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default My;
+export default EditStock;

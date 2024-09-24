@@ -7,6 +7,8 @@ interface States {
   increase: (by: number) => void;
   theme: string;
   setTheme: (theme: string) => void;
+  isDidiao: boolean;
+  setIsDidiao: (isDidiao: boolean) => void;
 }
 
 const useCaches = create<States>()(
@@ -17,6 +19,8 @@ const useCaches = create<States>()(
         increase: by => set(state => ({bears: state.bears + by})),
         theme: '#987123',
         setTheme: theme => set({theme}),
+        isDidiao: false,
+        setIsDidiao: isDidiao => set({isDidiao}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -25,6 +29,7 @@ const useCaches = create<States>()(
         partialize: state => ({
           bears: state.bears,
           theme: state.theme,
+          isDidiao: state.isDidiao,
         }),
       },
     ),

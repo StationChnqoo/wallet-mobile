@@ -89,7 +89,7 @@ const Stocks: React.FC<MyProps> = props => {
 
 const styles = StyleSheet.create({
   view: {
-    paddingVertical:6,
+    paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 12,
     backgroundColor: '#fff',
