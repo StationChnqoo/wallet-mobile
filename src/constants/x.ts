@@ -60,6 +60,9 @@ const Colors = {
     const b = parseInt(hex.substring(4, 6), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha || 1})`;
   },
+  STOCK: (n: number) => {
+    return n > 0 ? Color.RED : n < 0 ? Color.GREEN : '#ccc';
+  },
 };
 
 const Color = {

@@ -10,10 +10,12 @@ import {
 import * as React from 'react';
 import App from '@root/App';
 import MainScreen from './Main';
+import EditStock from './EditStock';
 
 export type RootStacksParams = {
   App: undefined;
   MainScreen: undefined;
+  EditStock: {id?: string};
 };
 
 const RootStack = createNativeStackNavigator<RootStacksParams>();
@@ -33,6 +35,7 @@ export default function Stacks() {
         }}>
         <RootStack.Screen name="MainScreen" component={MainScreen} />
         <RootStack.Screen name="App" component={App} />
+        <RootStack.Screen name="EditStock" component={EditStock} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

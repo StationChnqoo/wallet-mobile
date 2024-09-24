@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {FundsValue} from '@src/constants/Interfaces';
 import {create} from 'zustand';
 import {createJSONStorage, devtools, persist} from 'zustand/middleware';
 
@@ -9,6 +10,8 @@ interface States {
   setTheme: (theme: string) => void;
   isDidiao: boolean;
   setIsDidiao: (isDidiao: boolean) => void;
+  carefulStocks: FundsValue[];
+  setCarefulStocks: (carefulStocks: FundsValue[]) => void;
 }
 
 const useCaches = create<States>()(
@@ -21,6 +24,8 @@ const useCaches = create<States>()(
         setTheme: theme => set({theme}),
         isDidiao: false,
         setIsDidiao: isDidiao => set({isDidiao}),
+        carefulStocks: [],
+        setCarefulStocks: carefulStocks => set({carefulStocks}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -30,6 +35,7 @@ const useCaches = create<States>()(
           bears: state.bears,
           theme: state.theme,
           isDidiao: state.isDidiao,
+          carefulStocks: state.carefulStocks,
         }),
       },
     ),

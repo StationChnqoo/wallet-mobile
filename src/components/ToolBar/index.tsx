@@ -22,14 +22,11 @@ const ToolBar: React.FC<MyProps> = props => {
   const {title, onBackPress} = props;
   return (
     <View>
-      <StatusBar
+      {/* <StatusBar
         barStyle={'dark-content'}
         backgroundColor={'#fff'}
         translucent={false}
-      />
-      <View
-        style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
-      />
+      /> */}
       <View style={styles.views}>
         <TouchableOpacity
           activeOpacity={0.9}

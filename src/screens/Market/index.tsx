@@ -1,24 +1,9 @@
-import type {PropsWithChildren} from 'react';
 import React from 'react';
-import {
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {RootStacksProp} from '..';
 import MarketItem from '@src/components/MarketItem';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {RootStacksProp} from '..';
 
 interface MyProps {
   navigation?: RootStacksProp;

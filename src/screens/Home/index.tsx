@@ -12,6 +12,8 @@ import FundCounts from './components/FundCounts';
 import FundRanks from './components/FundRanks';
 import FundTrends from './components/FundTrends';
 import SuggestTips from './components/SuggestTips';
+import CarefulStocks from './components/CarefulStocks';
+import {useCaches} from '@src/stores';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -19,6 +21,7 @@ interface MyProps {
 
 const SECONDS = 10;
 const HomeScreen: React.FC<MyProps> = props => {
+  const {carefulStocks} = useCaches();
   const [counts, setCounts] = useState<number[]>(Array(3).fill(1));
   const [timer, setTimer] = useState<undefined | number>(undefined);
   const [values, setValues] = useState<Types.FundsValue[]>([]);
@@ -26,6 +29,7 @@ const HomeScreen: React.FC<MyProps> = props => {
   const [trends, setTrends] = useState<number[][]>(Array(4).fill([]));
   const [etf, setEtf] = useState<Types.FundsValue[]>([]);
   const [seconds, setSeconds] = useState(0);
+  const [stocks, setStocks] = useState<Types.FundsValue[]>([]);
 
   const init = async () => {
     loadFundCounts();
@@ -33,6 +37,7 @@ const HomeScreen: React.FC<MyProps> = props => {
     loadFundRanks();
     loadFundTrends();
     loadEtfDetails();
+    loadCarefulStocks();
   };
   useInterval(() => {
     setSeconds(t => (t + 1) % SECONDS);
@@ -44,6 +49,11 @@ const HomeScreen: React.FC<MyProps> = props => {
     }
     return function () {};
   }, [seconds]);
+
+  useEffect(() => {
+    setStocks([...carefulStocks]);
+    return function () {};
+  }, [carefulStocks]);
 
   useFocusEffect(
     useCallback(() => {
@@ -73,6 +83,15 @@ const HomeScreen: React.FC<MyProps> = props => {
       datas.push(result.data);
     }
     setValues(datas);
+  };
+
+  const loadCarefulStocks = async () => {
+    let datas = [...stocks];
+    for (let i = 0; i < stocks.length; i++) {
+      let result = await new Services().selectDfcfFundValues(stocks[i].f57);
+      datas[i] = {...result.data};
+      setStocks(datas);
+    }
   };
 
   const loadFundRanks = async () => {
@@ -129,6 +148,7 @@ const HomeScreen: React.FC<MyProps> = props => {
           {[
             <FundCounts datas={counts} />,
             <ETF datas={etf} />,
+            <CarefulStocks datas={stocks} />,
             <FundTrends datas={trends} values={values} />,
             // <FundValues datas={values} />,
             <FundRanks datas={ranks} />,

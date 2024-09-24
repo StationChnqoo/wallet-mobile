@@ -13,15 +13,17 @@ interface MyProps {
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  disabled?: boolean;
 }
 
 const Button: React.FC<MyProps> = props => {
-  const {title, onPress, style, textStyle} = props;
+  const {title, onPress, style, textStyle, disabled} = props;
   return (
     <TouchableOpacity
-      style={[styles.view, style]}
+      style={[styles.view, style, {opacity: disabled ? 0.618 : 1}]}
       activeOpacity={0.9}
-      onPress={onPress}>
+      onPress={onPress}
+      disabled={disabled}>
       <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );

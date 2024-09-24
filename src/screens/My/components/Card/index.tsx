@@ -5,15 +5,19 @@ import {StyleSheet, Text, View} from 'react-native';
 interface MyProps {
   children: React.ReactNode;
   title: string;
+  moreView?: React.JSX.Element;
 }
 
 const Card: React.FC<MyProps> = props => {
   const [tab, setTab] = useState(0);
-  const {children, title} = props;
+  const {children, title, moreView} = props;
 
   return (
     <View style={styles.view}>
-      <Text style={styles.text}>{title}</Text>
+      <View style={x.Styles.rowCenter('space-between')}>
+        <Text style={styles.text}>{title}</Text>
+        {moreView}
+      </View>
       <View style={{height: 4}} />
       {children}
     </View>

@@ -1,17 +1,18 @@
 import React from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import Stocks from './components/Stocks';
 import Color from './components/Color';
 import Secret from './components/Secret';
+import Stocks from './components/Stocks';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
 const My: React.FC<MyProps> = props => {
+  const {navigation} = props;
   return (
     <View style={{flex: 1}}>
       <View
@@ -19,7 +20,15 @@ const My: React.FC<MyProps> = props => {
       />
       <ScrollView>
         <View style={{flex: 1}}>
-          {[<Stocks />, <Color />, <Secret />].map((it, i) => (
+          {[
+            <Stocks
+              onNewStockPress={() => {
+                navigation.navigate('EditStock');
+              }}
+            />,
+            <Color />,
+            <Secret />,
+          ].map((it, i) => (
             <View key={i} style={{marginVertical: 6}}>
               {it}
             </View>
