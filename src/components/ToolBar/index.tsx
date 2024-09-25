@@ -2,6 +2,7 @@ import {RootStacksProp} from '@src/screens';
 import React from 'react';
 import {
   Image,
+  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -21,7 +22,13 @@ const IMAGE_SIZE = 16;
 const ToolBar: React.FC<MyProps> = props => {
   const {title, onBackPress} = props;
   return (
-    <View>
+    <View style={{}}>
+      <View
+        style={{
+          backgroundColor: '#fff',
+          height: Platform.select({ios: useSafeAreaInsets().top, android: 0}),
+        }}
+      />
       {/* <StatusBar
         barStyle={'dark-content'}
         backgroundColor={'#fff'}

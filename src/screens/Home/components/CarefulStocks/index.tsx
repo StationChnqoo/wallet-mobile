@@ -41,7 +41,11 @@ const CarefulStocks: React.FC<MyProps> = props => {
               <Text style={{fontSize: x.scale(12), color: x.Color.RED}}>
                 {`成交额: ${stock.f43}`}
               </Text>
-              <Text style={{fontSize: x.scale(12), color: x.Color.GREEN}}>
+              <Text
+                style={{
+                  fontSize: x.scale(12),
+                  color: x.Colors.STOCK(stock.f170),
+                }}>
                 {`涨跌幅: ${renderUpOrDown(stock.f170)}${(
                   stock.f170 / 100
                 ).toFixed(2)}%`}
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
     // marginTop: 6,
     borderWidth: 1,
     borderColor: '#ccc',
+    marginTop: 6,
   },
   viewCounts: {
     flexDirection: 'row',

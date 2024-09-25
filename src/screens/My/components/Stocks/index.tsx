@@ -81,7 +81,11 @@ const Stocks: React.FC<MyProps> = props => {
                   <Text style={{fontSize: x.scale(12), color: '#666'}}>
                     股票代号: {it.f57}
                   </Text>
-                  <Text style={{fontSize: x.scale(12), color: x.Color.GREEN}}>
+                  <Text
+                    style={{
+                      fontSize: x.scale(12),
+                      color: x.Colors.STOCK(it.f170),
+                    }}>
                     {`${renderUpOrDown(it.f170)}${(it.f170 / 100).toFixed(2)}%`}
                   </Text>
                 </View>

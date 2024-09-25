@@ -71,27 +71,33 @@ export default class Services {
     return result.data;
   }
 
-  /**
-   * 指数的实时净值
-   * @param code
-   */
-  async selectDfcfFundValues(code: string) {
+  buildCodePrefix(code: string) {
     /**
      * 目前爬虫发现的
      * 159开头的，请求参数`secid=` -> 0.xxx
      * 511开头的，请求参数为 ... -> 1.xxx
      */
-    let codePrefix = code.startsWith('159')
+    let codePrefix = code.startsWith('1')
       ? '0.'
-      : code.startsWith('511')
+      : code.startsWith('5') || code.startsWith('6')
       ? '1.'
       : '';
+    return codePrefix;
+  }
+
+  /**
+   * 指数的实时净值
+   * @param code
+   */
+  async selectDfcfFundValues(code: string) {
     this.instance.defaults.baseURL = 'https://push2.eastmoney.com';
     this.instance.defaults.headers[
       'referer'
     ] = `https://so.eastmoney.com/web/s?keyword=${code}`;
     let result = await this.instance.get(
-      `/api/qt/stock/get?cb=&fields=f57%2Cf58%2Cf59%2Cf152%2Cf43%2Cf169%2Cf170%2Cf60%2Cf44%2Cf45%2Cf168%2Cf50%2Cf47%2Cf48%2Cf49%2Cf46%2Cf78%2Cf85%2Cf86%2Cf169%2Cf117%2Cf107%2Cf111%2Cf116%2Cf117%2Cf118%2Cf163%2Cf171%2Cf113%2Cf114%2Cf115%2Cf161%2Cf162%2Cf164%2Cf168%2Cf172%2Cf177%2Cf180%2Cf181%2Cf292%2Cf751%2Cf752&secid=${codePrefix}${code}&invt=2`,
+      `/api/qt/stock/get?cb=&fields=f57%2Cf58%2Cf59%2Cf152%2Cf43%2Cf169%2Cf170%2Cf60%2Cf44%2Cf45%2Cf168%2Cf50%2Cf47%2Cf48%2Cf49%2Cf46%2Cf78%2Cf85%2Cf86%2Cf169%2Cf117%2Cf107%2Cf111%2Cf116%2Cf117%2Cf118%2Cf163%2Cf171%2Cf113%2Cf114%2Cf115%2Cf161%2Cf162%2Cf164%2Cf168%2Cf172%2Cf177%2Cf180%2Cf181%2Cf292%2Cf751%2Cf752&secid=${this.buildCodePrefix(
+        code,
+      )}${code}&invt=2`,
     );
     return result.data;
   }
