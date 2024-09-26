@@ -10,7 +10,7 @@ export interface FundsCount {
 }
 
 export interface FundsValue {
-  /** 当前净值 */
+  /** 股票价格 * 1000 */
   f43: number;
   /** 股票代号 */
   f57: string;

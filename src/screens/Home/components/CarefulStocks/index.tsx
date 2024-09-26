@@ -38,18 +38,21 @@ const CarefulStocks: React.FC<MyProps> = props => {
               <Text style={{fontSize: x.scale(12), color: '#666'}}>
                 股票代码: {isDidiao ? '******' : stock.f57}
               </Text>
-              <Text style={{fontSize: x.scale(12), color: x.Color.RED}}>
-                {`成交额: ${stock.f43}`}
-              </Text>
-              <Text
-                style={{
-                  fontSize: x.scale(12),
-                  color: x.Colors.STOCK(stock.f170),
-                }}>
-                {`涨跌幅: ${renderUpOrDown(stock.f170)}${(
-                  stock.f170 / 100
-                ).toFixed(2)}%`}
-              </Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={{fontSize: x.scale(12), color: '#333'}}>
+                  {`${(stock.f43 / 1000).toFixed(3)}`}
+                </Text>
+                <Text style={{marginHorizontal: 6, color: '#999'}}>|</Text>
+                <Text
+                  style={{
+                    fontSize: x.scale(12),
+                    color: x.Colors.STOCK(stock.f170),
+                  }}>
+                  {`${renderUpOrDown(stock.f170)}${(stock.f170 / 100).toFixed(
+                    2,
+                  )}%`}
+                </Text>
+              </View>
             </View>
           </View>
         ))}

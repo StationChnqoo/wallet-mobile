@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 
 import {RouteProp} from '@react-navigation/native';
 import Button from '@src/components/Button';
 import ToolBar from '@src/components/ToolBar';
 import {FundsValue} from '@src/constants/Interfaces';
+import Services from '@src/constants/Services';
+import Toaster from '@src/constants/Toaster';
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
 import {RootStacksParams, RootStacksProp} from '..';
-import Services from '@src/constants/Services';
-import Toaster from '@src/constants/Toaster';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -90,14 +90,17 @@ const EditStock: React.FC<MyProps> = props => {
                   <Text style={{fontSize: x.scale(12), color: '#666'}}>
                     股票代码: {stock.f57}
                   </Text>
-                  <Text style={{fontSize: x.scale(12), color: x.Color.RED}}>
-                    {`成交额: ${stock.f43}`}
-                  </Text>
-                  <Text style={{fontSize: x.scale(12), color: x.Color.GREEN}}>
-                    {`涨跌幅: ${renderUpOrDown(stock.f170)}${(
-                      stock.f170 / 100
-                    ).toFixed(2)}%`}
-                  </Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{fontSize: x.scale(12), color: '#333'}}>
+                      {`${(stock.f43 / 1000).toFixed(3)}`}
+                    </Text>
+                    <Text style={{marginHorizontal: 6, color: '#999'}}>|</Text>
+                    <Text style={{fontSize: x.scale(12), color: x.Color.GREEN}}>
+                      {`${renderUpOrDown(stock.f170)}${(
+                        stock.f170 / 100
+                      ).toFixed(2)}%`}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // margin: 12,
     fontSize: x.scale(16),
-    paddingVertical: 2,
+    paddingVertical: Platform.select({android: 2, ios: 6}),
     paddingHorizontal: 12,
     flex: 1,
   },

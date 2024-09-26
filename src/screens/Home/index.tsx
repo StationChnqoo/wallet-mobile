@@ -21,7 +21,7 @@ interface MyProps {
 
 const SECONDS = 10;
 const HomeScreen: React.FC<MyProps> = props => {
-  const {carefulStocks} = useCaches();
+  const {carefulStocks, setCarefulStocks} = useCaches();
   const [counts, setCounts] = useState<number[]>(Array(3).fill(1));
   const [timer, setTimer] = useState<undefined | number>(undefined);
   const [values, setValues] = useState<Types.FundsValue[]>([]);
@@ -92,6 +92,7 @@ const HomeScreen: React.FC<MyProps> = props => {
       datas[i] = {...result.data};
       setStocks(datas);
     }
+    // setCarefulStocks([...datas]);
   };
 
   const loadFundRanks = async () => {
