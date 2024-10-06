@@ -16,15 +16,19 @@ export default class Services {
         s: md5(`Chnqoo@t:${time}`),
       },
     });
-    this.instance.interceptors.request.use(request => {
-      return AxiosLogger.requestLogger(request, {
-        prefixText: 'react-native/axios',
-        dateFormat: 'yyyy-mm-dd HH:MM:ss',
-        params: true,
-        headers: true,
-        method: true,
+    let couldPrintPaths = [];
+    // 添加白名单机制
+    if (couldPrintPaths.length > 0) {
+      this.instance.interceptors.request.use(request => {
+        return AxiosLogger.requestLogger(request, {
+          prefixText: 'react-native/axios',
+          dateFormat: 'yyyy-mm-dd HH:MM:ss',
+          params: true,
+          headers: true,
+          method: true,
+        });
       });
-    });
+    }
     this.instance.interceptors.response.use(response => {
       return response;
     });

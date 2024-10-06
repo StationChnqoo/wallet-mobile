@@ -38,3 +38,10 @@ export interface FundsRank {
   /** 板块名字 */
   f14: string;
 }
+
+export interface PlanBuy {
+  id: number; // 月份
+  money: number; // 购买金额
+  currentPrice: number; // 当前价格
+  count: number; // 购买份额
+}

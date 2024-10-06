@@ -21,7 +21,7 @@ const Secret: React.FC<MyProps> = props => {
           value={isDidiao}
           onValueChange={() => setIsDidiao(!isDidiao)}
           thumbColor={isDidiao ? theme : '#999'}
-          trackColor={{false: '#ccc', true: x.Colors.hex2Rgba(theme, 0.58)}}
+          trackColor={{false: '#ccc', true: x.Colors.hex2Rgba(theme, 0.28)}}
         />
       </View>
     </Card>

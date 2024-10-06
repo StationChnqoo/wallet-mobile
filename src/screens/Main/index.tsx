@@ -4,9 +4,10 @@ import React from 'react';
 import {Image} from 'react-native';
 import HomeScreen from '../Home';
 
-import OrderScreen from '../Order';
+import Plan from '../Plan';
 import My from '../My';
 import {useCaches} from '@src/stores';
+import PlanScreen from '../Plan';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,10 +21,10 @@ function MainScreen() {
       label: '首页',
     },
     {
-      name: 'Hot',
-      component: OrderScreen,
+      name: 'Plan',
+      component: PlanScreen,
       icon: require('./assets/menu_order.png'),
-      label: '账单',
+      label: '计划',
     },
     {
       name: 'Message',

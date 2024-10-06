@@ -129,6 +129,7 @@ const HomeScreen: React.FC<MyProps> = props => {
       '511220', // 城投债ETF
       '511260', // 十年国债ETF
       '511270', // 十年地方债ETF
+      '511130', // 30年国债指数ETF
     ];
     let datas = [];
     for (let i = 0; i < codes.length; i++) {
@@ -143,7 +144,7 @@ const HomeScreen: React.FC<MyProps> = props => {
       <View
         style={{height: useSafeAreaInsets().top, backgroundColor: '#fff'}}
       />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView contentInsetAdjustmentBehavior="automatic" bounces={false}>
         <View style={{paddingHorizontal: 15}}>
           <View style={{height: 12}} />
           {[
