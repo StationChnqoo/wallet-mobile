@@ -3,8 +3,8 @@ import {StyleSheet, Switch, Text, View} from 'react-native';
 
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
-import {RootStacksProp} from '..';
 import Card from '../Card';
+import { RootStacksProp } from '@src/screens';
 
 interface MyProps {
   navigation?: RootStacksProp;

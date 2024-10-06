@@ -45,3 +45,17 @@ export interface PlanBuy {
   currentPrice: number; // 当前价格
   count: number; // 购买份额
 }
+
+export interface RealBuyFund {
+  id: string; // 编号
+  title: string; // 名字
+  message: string; // 描述
+  stage: number; // 当前周期
+  status: number; // [停止， 暂停, 进行][-1, 0, 1]
+  records: RealBuyFundRecord[];
+}
+
+export interface RealBuyFundRecord {
+  date: string; // 时间
+  value: string; // 买入卖出金额
+}

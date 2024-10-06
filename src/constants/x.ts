@@ -12,6 +12,17 @@ const f = (params: any) => {};
 const HEIGHT = Dimensions.get('screen').height;
 const WIDTH = Dimensions.get('screen').width;
 
+const Strings = {
+  mask: (s: string, keepLength: number, filledString?: string) => {
+    if (s.length <= keepLength * 2) return s;
+    const start = s.slice(0, keepLength);
+    const end = s.slice(-keepLength);
+    return `${start}${
+      filledString || '*'.repeat(s.length - keepLength * 2)
+    }${end}`;
+  },
+};
+
 const styles = StyleSheet.create({
   card: {
     // iOS 阴影
@@ -299,6 +310,7 @@ const x = {
   COLORS,
   Files,
   Colors,
+  Strings,
 };
 
 export default x;

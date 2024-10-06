@@ -3,11 +3,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image} from 'react-native';
 import HomeScreen from '../Home';
-
-import Plan from '../Plan';
-import My from '../My';
 import {useCaches} from '@src/stores';
+import My from '../My';
 import PlanScreen from '../Plan';
+import WalletScreen from '../Wallet';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,20 +22,14 @@ function MainScreen() {
     {
       name: 'Plan',
       component: PlanScreen,
-      icon: require('./assets/menu_order.png'),
+      icon: require('./assets/menu_plan.png'),
       label: '计划',
     },
     {
-      name: 'Message',
-      component: HomeScreen,
-      icon: require('./assets/menu_message.png'),
-      label: '消息',
-    },
-    {
-      name: 'Friends',
-      component: HomeScreen,
-      icon: require('./assets/menu_friends.png'),
-      label: '社区',
+      name: 'Wallet',
+      component: WalletScreen,
+      icon: require('./assets/menu_wallet.png'),
+      label: '钱包',
     },
     {
       name: 'Me',
