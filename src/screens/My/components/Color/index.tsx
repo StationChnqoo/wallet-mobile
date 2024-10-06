@@ -8,7 +8,7 @@ import Card from '../Card';
 interface MyProps {}
 
 const Color: React.FC<MyProps> = props => {
-  const {font, setFont, theme, setTheme} = useCaches();
+  const {theme, setTheme} = useCaches();
   const [colors, setColors] = useState([]);
   const [r, setR] = useState(0);
 
@@ -44,7 +44,7 @@ const Color: React.FC<MyProps> = props => {
           ))}
         </View>
         <Button
-          title={'换一组'}
+          title={`${theme} 换一组`}
           textStyle={{color: 'white', fontSize: x.scale(12)}}
           style={[
             styles.button,

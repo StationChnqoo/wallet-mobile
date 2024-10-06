@@ -20,6 +20,7 @@ const My: React.FC<MyProps> = props => {
       />
       <ScrollView>
         <View style={{flex: 1}}>
+          <View style={{height: 6}} />
           {[
             <Stocks
               onNewStockPress={() => {

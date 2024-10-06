@@ -77,7 +77,7 @@ const Colors = {
 };
 
 const Color = {
-  PAGE: '#f0f0f0',
+  PAGE: '#f8f8f8',
   RED: '#ff2121',
   GREEN: '#00bc12',
   BLUE: '#177cb0',
