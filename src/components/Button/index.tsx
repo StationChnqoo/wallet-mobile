@@ -20,7 +20,7 @@ const Button: React.FC<MyProps> = props => {
   const {title, onPress, style, textStyle, disabled} = props;
   return (
     <TouchableOpacity
-      style={[styles.view, style, {opacity: disabled ? 0.618 : 1}]}
+      style={[styles.view, style, {opacity: disabled ? 0.38 : 1}]}
       activeOpacity={0.9}
       onPress={onPress}
       disabled={disabled}>

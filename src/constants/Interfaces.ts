@@ -39,6 +39,15 @@ export interface FundsRank {
   f14: string;
 }
 
+export interface PlanConfig {
+  price: number; // 当前价格
+  reduceRate: number; // 每月亏百分比
+  monthBuy: number; // 每个月定投金额
+  months: number; // 定投周期
+  walletCouldUse: number; // 总资产
+  count: number; // 鸡的数量
+}
+
 export interface PlanBuy {
   id: number; // 月份
   money: number; // 购买金额
