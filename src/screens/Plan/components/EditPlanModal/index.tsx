@@ -52,13 +52,7 @@ const EditPlanModal = (props: MyProps) => {
         <View style={{height: 12}} />
         <View style={x.Styles.rowCenter('space-between')}>
           <Button
-            style={{
-              borderColor: theme,
-              borderWidth: 1,
-              height: x.scale(36),
-              borderRadius: 5,
-              flex: 1,
-            }}
+            style={[styles.bottonCancel, {borderColor: theme}]}
             textStyle={{color: theme}}
             title={'取消'}
             onPress={onClose}
@@ -87,6 +81,12 @@ const EditPlanModal = (props: MyProps) => {
 const styles = StyleSheet.create({
   view: {
     padding: 16,
+  },
+  bottonCancel: {
+    borderWidth: 1,
+    height: x.scale(36),
+    borderRadius: 5,
+    flex: 1,
   },
   input: {
     textAlign: 'right',
