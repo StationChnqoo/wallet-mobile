@@ -60,10 +60,14 @@ export interface RealBuyFund {
   title: string; // 名字
   message: string; // 描述
   stage: number; // 当前周期
-  status: number; // [停止， 暂停, 进行][-1, 0, 1]ß
+  status: number; // [停止， 暂停, 进行][-1, 0, 1]
   records: RealBuyFundRecord[];
   count: number; // 持有份额
-  price: number; // 持仓成本价
+  price?: number; // 持仓成本价
+  currentPrice?: number; // 当前净值
+  rateToday?: number; // 当天亏损
+  rateFromBuy?: number; // 持仓到目前的亏损
+  tiantianUpdateDate?: string; // 天天基金更新时间
 }
 
 export interface RealBuyFundRecord {

@@ -37,6 +37,7 @@ const WallectItem = (props: MyProps) => {
           {isDidiao ? x.Strings.mask(item.title, 3, ' **** ') : item.title}
         </Text>
         <TouchableOpacity
+          style={x.Styles.rowCenter('flex-start')}
           activeOpacity={x.Touchable.OPACITY}
           hitSlop={x.Touchable.hitlop()}
           onPress={() => {
@@ -48,6 +49,15 @@ const WallectItem = (props: MyProps) => {
               setIsShowMore(!isShowMore);
             }
           }}>
+          <Text
+            style={{
+              color: x.Colors.STOCK(item.rateToday),
+              fontSize: x.scale(16),
+              fontWeight: '500',
+            }}>
+            {item.rateToday}%
+            {item.rateToday > 0 ? '↑' : item.rateToday < 0 ? '↓' : ''}
+          </Text>
           <Image
             source={
               isShowMore
@@ -58,11 +68,11 @@ const WallectItem = (props: MyProps) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{height: 4}} />
+      <View style={{height: 6}} />
       <View style={x.Styles.rowCenter('space-between')}>
         <View>
           <Text style={styles.title}>阶段：{item.stage} / 12</Text>
-          <View style={{height: 4}} />
+          <View style={{height: 6}} />
           <Text style={styles.title}>骚操作次数：{item.records.length}</Text>
         </View>
         <View style={[styles.tag, {borderColor: color}]}>
@@ -71,6 +81,60 @@ const WallectItem = (props: MyProps) => {
           </Text>
         </View>
       </View>
+      <View style={{height: 6}} />
+      <View style={{}}>
+        <View style={x.Styles.rowCenter('flex-start')}>
+          <Text style={{color: '#333', fontSize: x.scale(14)}}>
+            持仓信息：{item.price}
+          </Text>
+          <Text style={{color: '#999'}}> | </Text>
+          <Text
+            style={{
+              fontSize: x.scale(14),
+              color: x.Colors.STOCK(item.currentPrice - item.price),
+            }}>
+            {item.currentPrice}
+          </Text>
+          <Text style={{color: '#999'}}> | </Text>
+          <Text
+            style={{
+              fontSize: x.scale(14),
+              color: '#333',
+            }}>
+            {item.count}份
+          </Text>
+        </View>
+      </View>
+      <View style={{height: 6}} />
+      <View style={x.Styles.rowCenter()}>
+        <View style={x.Styles.rowCenter('flex-start')}>
+          <Text style={{color: '#333', fontSize: x.scale(14)}}>持仓盈亏：</Text>
+          <Text
+            style={{
+              fontSize: x.scale(14),
+              color: x.Colors.STOCK(item.currentPrice - item.price),
+            }}>
+            {((item.currentPrice - item.price) * item.count).toFixed(2)}
+            {item.currentPrice - item.price > 0
+              ? '↑'
+              : item.currentPrice - item.price < 0
+              ? '↓'
+              : ''}
+          </Text>
+        </View>
+        <View style={x.Styles.rowCenter('flex-start')}>
+          <Text style={{color: '#333', fontSize: x.scale(14)}}>当天盈亏：</Text>
+          <Text
+            style={{
+              fontSize: x.scale(14),
+              color: x.Colors.STOCK(item.rateToday),
+            }}>
+            {((item.price * item.count * item.rateToday) / 100).toFixed(2)}
+            {item.rateToday > 0 ? '↑' : item.rateToday < 0 ? '↓' : ''}
+          </Text>
+        </View>
+      </View>
+
       {item.records.length > 0 && isShowMore ? (
         <View style={{}}>
           <View

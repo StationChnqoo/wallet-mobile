@@ -138,6 +138,29 @@ export default class Services {
   }
 
   /**
+   * 天天基金详情
+   * @param code 
+   * @returns 
+   */
+  async selectTianTianFundDetail(code: string) {
+    this.instance.defaults.baseURL = 'https://fundcomapi.tiantianfunds.com';
+    this.instance.defaults.headers['referer'] = `https://h5.1234567.com.cn/`;
+    this.instance.defaults.headers['Content-Type'] =
+      'application/x-www-form-urlencoded';
+    let result = await this.instance.post(`/mm/newCore/FundCoreDiyNew`, {
+      deviceid: '1234567.py.service',
+      product: 'EFund',
+      plat: 'Iphone',
+      FCODES: code,
+      // version: '6.5.5',
+      // appVersion: '6.5.5',
+      FIELDS:
+        'SHORTNAME,RZDF,DWJZ,LJJZ,SYL_1N,SYL_LN,FSRQ,ISBUY,DTZT,FTYPE,FCODE,ISSALES,ISSBDATE,ISSEDATE,TSRQ,BACKCODE,MINSG,MINSBSG,SHZT,SGZT,SOURCERATE,RATE,REALSGCODE,FEATURE,SYL,MINRG,SYL_Z,BFUNDTYPE,QDTCODE,MINDT,BAGTYPE,FUNDTYPE,BENCH,ESTABDATE,,SELLSTATE,ESTDIFF,SYSDATE,PTYPE,FUNDTYPE,ISEXCHG,ISNEW,BTYPE',
+    });
+    return result.data;
+  }
+
+  /**
    * 场内ETF交易详情
    * @param code
    */
