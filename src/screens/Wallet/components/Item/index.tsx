@@ -33,7 +33,8 @@ const WallectItem = (props: MyProps) => {
             flex: 1,
           }}
           numberOfLines={1}>
-          {item.id} · {isDidiao ? x.Strings.mask(item.title, 3, ' **** ') : item.title}
+          {item.id} ·{' '}
+          {isDidiao ? x.Strings.mask(item.title, 3, ' **** ') : item.title}
         </Text>
         <TouchableOpacity
           activeOpacity={x.Touchable.OPACITY}
@@ -70,6 +71,28 @@ const WallectItem = (props: MyProps) => {
           </Text>
         </View>
       </View>
+      {item.records.length > 0 && isShowMore ? (
+        <View style={{}}>
+          <View
+            style={{height: 1, backgroundColor: '#ddd', marginVertical: 12}}
+          />
+          {item.records.map((it, i) => (
+            <View key={i} style={styles.item}>
+              <Text style={{fontSize: x.scale(14), color: '#999'}}>
+                {it.date}
+              </Text>
+              <Text
+                style={{
+                  fontSize: x.scale(14),
+                  color: x.Colors.STOCK(it.value),
+                }}>
+                {it.value}
+                {it.value > 0 ? '↑' : it.value < 0 ? '↓' : ''}
+              </Text>
+            </View>
+          ))}
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -92,6 +115,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 2,
     paddingHorizontal: 4,
+  },
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 2,
   },
 });
 

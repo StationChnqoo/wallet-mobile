@@ -7,7 +7,12 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 1.6524,
+    count: 96.83,
+    records: [
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
   {
     id: '002959',
@@ -15,7 +20,12 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 1.272,
+    count: 125.79,
+    records: [
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
   {
     id: '002199',
@@ -23,7 +33,12 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 0.8545,
+    count: 187.25,
+    records: [
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
   {
     id: '007301',
@@ -31,7 +46,13 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 1.6442,
+    count: 158.13,
+    records: [
+      {date: '2024-09-26', value: 100},
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
   {
     id: '011041',
@@ -39,7 +60,13 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 0.4215,
+    count: 616.9,
+    records: [
+      {date: '2024-09-26', value: 100},
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
   {
     id: '000960',
@@ -47,7 +74,13 @@ const MyWallet: RealBuyFund[] = [
     stage: 5,
     message: '',
     status: 1,
-    records: [],
+    price: 1.6893,
+    count: 153.91,
+    records: [
+      {date: '2024-09-26', value: 100},
+      {date: '2024-10-06', value: 80},
+      {date: '2024-10-10', value: 80},
+    ],
   },
 ];
 

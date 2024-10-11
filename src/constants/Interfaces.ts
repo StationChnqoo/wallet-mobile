@@ -60,11 +60,13 @@ export interface RealBuyFund {
   title: string; // 名字
   message: string; // 描述
   stage: number; // 当前周期
-  status: number; // [停止， 暂停, 进行][-1, 0, 1]
+  status: number; // [停止， 暂停, 进行][-1, 0, 1]ß
   records: RealBuyFundRecord[];
+  count: number; // 持有份额
+  price: number; // 持仓成本价
 }
 
 export interface RealBuyFundRecord {
   date: string; // 时间
-  value: string; // 买入卖出金额
+  value: number; // 买入卖出金额
 }
